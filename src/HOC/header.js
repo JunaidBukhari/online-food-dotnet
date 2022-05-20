@@ -1,14 +1,14 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 const Header = () => {
   return (
-    <nav id='home' class='navbar navbar-expand-lg navbar-dark bg-dark'>
-      <div class='container-fluid'>
-        <a class='navbar-brand' href='http://localhost/project/project.php'>
+    <div id='home' className='navbar navbar-expand-lg navbar-dark bg-dark'>
+      <div className='container-fluid'>
+        <Link to='/' className='navbar-brand'>
           MY ONLINE FOOD
-        </a>
+        </Link>
         <button
-          class='navbar-toggler'
+          className='navbar-toggler'
           type='button'
           data-bs-toggle='collapse'
           data-bs-target='#navbarSupportedContent'
@@ -16,30 +16,23 @@ const Header = () => {
           aria-expanded='false'
           aria-label='Toggle navigation'
         >
-          <span class='navbar-toggler-icon'></span>
+          <span className='navbar-toggler-icon'></span>
         </button>
-        <div class='collapse navbar-collapse' id='navbarSupportedContent'>
-          <ul class='navbar-nav me-auto mb-2 mb-lg-0'>
-            <li class='nav-item'>
-              <a
-                class='nav-link active'
-                aria-current='page'
-                href='http://localhost/project/project.php'
-              >
+        <div className='collapse navbar-collapse' id='navbarSupportedContent'>
+          <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
+            <li className='nav-item'>
+              <Link to='/home' className='navbar-brand'>
                 Home
-              </a>
+              </Link>
             </li>
-            <li class='nav-item'>
-              <a
-                class='nav-link active'
-                href='http://localhost/project/services.php'
-              >
+            <li className='nav-item'>
+              <Link to='/services' className='navbar-brand active'>
                 Services
-              </a>
+              </Link>
             </li>
-            <li class='nav-item dropdown'>
+            <li className='nav-item dropdown'>
               <a
-                class='nav-link dropdown-toggle active'
+                className='nav-link dropdown-toggle active'
                 href='#'
                 id='navbarDropdown'
                 role='button'
@@ -48,28 +41,22 @@ const Header = () => {
               >
                 More
               </a>
-              <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
+              <ul className='dropdown-menu' aria-labelledby='navbarDropdown'>
                 <li>
-                  <a
-                    class='dropdown-item'
-                    href='http://localhost/project/contact.php'
-                  >
-                    Contact us
-                  </a>
+                  <Link to='/contact' className='dropdown-item'>
+                    Contact Us
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    class='dropdown-item'
-                    href='http://localhost/project/menu.php'
-                  >
+                  <Link to='/menu' className='dropdown-item'>
                     Menu
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
-            <li class='nav-item'>
+            <li className='nav-item'>
               <a
-                class=' btn btn-danger '
+                className=' btn btn-danger '
                 aria-current='page'
                 href='http://localhost/project/addorder.php'
               >
@@ -79,7 +66,7 @@ const Header = () => {
           </ul>
 
           <a
-            class='btn btn-warning mr-5'
+            className='btn btn-warning mr-5'
             href='http://localhost/project/admin.php'
           >
             <svg
@@ -87,7 +74,7 @@ const Header = () => {
               width='16'
               height='16'
               fill='currentColor'
-              class='bi bi-lock'
+              className='bi bi-lock'
               viewBox='0 0 16 16'
             >
               <path d='M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z' />
@@ -96,16 +83,16 @@ const Header = () => {
           </a>
           <a
             href='http://localhost/project/addorder.php'
-            class='btn text-light'
+            className='btn text-light'
           >
-            <i class='fa p-2' style={{ fontSize: '24px' }}>
+            <i className='fa p-2' style={{ fontSize: '24px' }}>
               &#xf07a;
             </i>
             <span className='badge badge-danger'> 5 </span>
           </a>
         </div>
       </div>
-    </nav>
+    </div>
   );
 };
 

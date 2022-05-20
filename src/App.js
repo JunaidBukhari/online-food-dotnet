@@ -10,15 +10,15 @@ function App() {
     <div className='App'>
       <Toaster position='bottom-center' reverseOrder={false} />
 
-      <Header />
       <Router>
+        <Header />
         <Routes>
           <Route path='/' element={<Start />}></Route>
           <Route path='/menu' element={<Menu />}></Route>
           <Route path='/*' element={<NotFound />}></Route>
         </Routes>
+        <Footer />
       </Router>
-      <Footer />
     </div>
   );
 }
