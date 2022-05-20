@@ -3,8 +3,11 @@ import React, { useState } from 'react';
 const Auth = () => {
   const [tab, setTab] = useState('Login');
   return (
-    <div className='container p-5 d-flex justify-content-center'>
-      <div style={{ width: '50%' }}>
+    <div
+      style={{ backgroundColor: 'rgb(255 255 255 / 70%)' }}
+      className='mt-5 container p-5 d-flex justify-content-center'
+    >
+      <div className='col-xl-8 col-lg-8 col-md-12'>
         <ul class='nav nav-pills nav-justified mb-3' id='ex1' role='tablist'>
           <li class='nav-item' role='presentation'>
             <span
@@ -30,21 +33,21 @@ const Auth = () => {
             <div class='tab-pane fade show active'>
               <form>
                 <div class='form-outline mb-4'>
-                  <input type='email' id='loginName' class='form-control' />
-                  <label class='form-label' for='loginName'>
-                    Email or username
-                  </label>
+                  <input
+                    placeholder='Email or Username'
+                    type='email'
+                    id='loginName'
+                    class='form-control'
+                  />
                 </div>
 
                 <div class='form-outline mb-4'>
                   <input
+                    placeholder='Password'
                     type='password'
                     id='loginPassword'
                     class='form-control'
                   />
-                  <label class='form-label' for='loginPassword'>
-                    Password
-                  </label>
                 </div>
 
                 <div class='row mb-4'>
@@ -58,8 +61,7 @@ const Auth = () => {
                         checked
                       />
                       <label class='form-check-label' for='loginCheck'>
-                        {' '}
-                        Remember me{' '}
+                        Remember me
                       </label>
                     </div>
                   </div>
@@ -75,7 +77,17 @@ const Auth = () => {
 
                 <div class='text-center'>
                   <p>
-                    Not a member? <a href='#!'>Register</a>
+                    Not a member?
+                    <span
+                      style={{
+                        cursor: 'pointer',
+                        color: '#007BFF',
+                        marginLeft: '5px',
+                      }}
+                      onClick={() => setTab('Register')}
+                    >
+                      Register
+                    </span>
                   </p>
                 </div>
               </form>
@@ -84,50 +96,48 @@ const Auth = () => {
             <div class='tab-pane fade show active'>
               <form>
                 <div class='form-outline mb-4'>
-                  <input type='text' id='registerName' class='form-control' />
-                  <label class='form-label' for='registerName'>
-                    Name
-                  </label>
+                  <input
+                    placeholder='Name'
+                    type='text'
+                    id='registerName'
+                    class='form-control'
+                  />
                 </div>
 
                 <div class='form-outline mb-4'>
                   <input
+                    placeholder='Username'
                     type='text'
                     id='registerUsername'
                     class='form-control'
                   />
-                  <label class='form-label' for='registerUsername'>
-                    Username
-                  </label>
-                </div>
-
-                <div class='form-outline mb-4'>
-                  <input type='email' id='registerEmail' class='form-control' />
-                  <label class='form-label' for='registerEmail'>
-                    Email
-                  </label>
                 </div>
 
                 <div class='form-outline mb-4'>
                   <input
+                    placeholder='Email'
+                    type='email'
+                    id='registerEmail'
+                    class='form-control'
+                  />
+                </div>
+
+                <div class='form-outline mb-4'>
+                  <input
+                    placeholder='Password'
                     type='password'
                     id='registerPassword'
                     class='form-control'
                   />
-                  <label class='form-label' for='registerPassword'>
-                    Password
-                  </label>
                 </div>
 
                 <div class='form-outline mb-4'>
                   <input
+                    placeholder='Repeat Password'
                     type='password'
                     id='registerRepeatPassword'
                     class='form-control'
                   />
-                  <label class='form-label' for='registerRepeatPassword'>
-                    Repeat password
-                  </label>
                 </div>
 
                 <div class='form-check d-flex justify-content-center mb-4'>
@@ -139,9 +149,9 @@ const Auth = () => {
                     checked
                     aria-describedby='registerCheckHelpText'
                   />
-                  <label class='form-check-label' for='registerCheck'>
+                  <span class='form-check-label' for='registerCheck'>
                     I have read and agree to the terms
-                  </label>
+                  </span>
                 </div>
 
                 <button type='submit' class='btn btn-primary btn-block mb-3'>
