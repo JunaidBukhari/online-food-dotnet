@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className=''>
+    <footer>
       <div
         className='d-flex justify-content-center'
         style={{ backgroundColor: 'black' }}

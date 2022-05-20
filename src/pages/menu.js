@@ -1,4 +1,5 @@
 import React from 'react';
+import toast from 'react-hot-toast';
 
 const Menu = () => {
   const data = [
@@ -43,6 +44,9 @@ const Menu = () => {
       image: 'https://hamariweb.com/recipes/images/recipeimages/70962.jpg',
     },
   ];
+  const addToCart = () => {
+    toast.success('Added to Cart Successfully');
+  };
   return (
     <div className='container '>
       <div
@@ -51,7 +55,10 @@ const Menu = () => {
       >
         {data.map((d) => (
           <div
-            style={{ maxWidth: '350px', minWidth: '350px' }}
+            style={{
+              maxWidth: '350px',
+              minWidth: '350px',
+            }}
             key={d.id}
             className='col col-lg-6 col-xl-4 col-md-12 mt-4'
           >
@@ -61,15 +68,26 @@ const Menu = () => {
               src={d.image}
               alt='Card image cap'
             />
-            <div style={{ backgroundColor: 'white' }} className='card-body'>
+            <div
+              style={{
+                maxHeight: '120px',
+                minHeight: '120px',
+                backgroundColor: 'white',
+              }}
+              className='card-body'
+            >
               <span
                 className='d-flex'
                 style={{ justifyContent: 'space-between' }}
               >
-                <h5>{d.title}</h5>
+                <h5 className='text-dark'>{d.title}</h5>
                 <h5 style={{ color: 'green' }}>Rs.{d.price}</h5>
               </span>
-              <button className='btn btn-success' onClick={() => {}}>
+              <button
+                style={{ position: 'absolute', bottom: '5px' }}
+                className='btn btn-success'
+                onClick={addToCart}
+              >
                 ADD TO CART
               </button>
             </div>

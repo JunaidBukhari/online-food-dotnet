@@ -96,9 +96,12 @@ const Header = () => {
           </a>
           <a
             href='http://localhost/project/addorder.php'
-            class='btn btn-success'
+            class='btn text-light'
           >
-            <i class='fa fa-shopping-cart'></i>
+            <i class='fa p-2' style={{ fontSize: '24px' }}>
+              &#xf07a;
+            </i>
+            <span className='badge badge-danger'> 5 </span>
           </a>
         </div>
       </div>
