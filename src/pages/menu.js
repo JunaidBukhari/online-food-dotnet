@@ -44,8 +44,11 @@ const Menu = () => {
     },
   ];
   return (
-    <div className='container d-flex justify-content-center'>
-      <div style={{ marginBottom: '100px' }} className='row '>
+    <div className='container '>
+      <div
+        style={{ marginBottom: '100px' }}
+        className='row d-flex justify-content-center'
+      >
         {data.map((d) => (
           <div
             style={{ maxWidth: '350px', minWidth: '350px' }}

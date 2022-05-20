@@ -2,9 +2,12 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className='bg-light text-center text-lg-start'>
-      <div className='text-center p-3' style={{ backgroundColor: 'black' }}>
-        © 2021 Copyright:
+    <footer className=''>
+      <div
+        className='d-flex justify-content-center'
+        style={{ backgroundColor: 'black' }}
+      >
+        <span className='text-light'> © </span>
         <a className='text-light' href='#'>
           MY ONLINE FOOD
         </a>
