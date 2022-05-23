@@ -1,36 +1,83 @@
 import * as React from 'react';
-const MyTable = (props) => {
-  const { data } = props;
+import { useSelector, useDispatch } from 'react-redux';
+import { addToCart } from '../redux-toolkit/dataSlice';
+const MyTable = () => {
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.data.cart);
+  const increment = (d) => {
+    let newCart = [...cart];
+    let obj = newCart.filter((c) => c.id === d.id)?.[0];
+    let number = obj.item;
+    let newObj = { ...obj, item: ++number };
+    let index = newCart.indexOf(obj);
+    newCart[index] = newObj;
+    dispatch(addToCart(newCart));
+  };
+  const decrement = (d) => {
+    let newCart = [...cart];
+    let obj = newCart.filter((c) => c.id === d.id)?.[0];
+    let index = newCart.indexOf(obj);
+    let number = obj.item;
+    if (number > 1) {
+      let newObj = { ...obj, item: --number };
+      newCart[index] = newObj;
+      dispatch(addToCart(newCart));
+    } else {
+      newCart.splice(index, 1);
+      dispatch(addToCart(newCart));
+    }
+  };
+  const handleDelete = (d) => {
+    let newCart = [...cart];
+    let obj = newCart.filter((c) => c.id === d.id)?.[0];
+    let index = newCart.indexOf(obj);
+    newCart.splice(index, 1);
+    dispatch(addToCart(newCart));
+  };
   return (
     <div className='mt-5'>
-      <ul style={{ border: 'none', background: 'black' }} class='list-group'>
-        <li class='list-group-item d-flex justify-content-between align-items-center'>
-          Name
-          <div>
-            <span>Amount</span>
-          </div>
-          <div>
-            <span>Price</span>
-          </div>
-          <div>
-            <span>Action</span>
-          </div>
-        </li>
-      </ul>
-      <ul class='list-group'>
-        <li class='list-group-item d-flex justify-content-between align-items-center'>
-          zinger
-          <div>
-            <span class='btn btn-sm btn-success mr-2 pt-0'>+</span>
-            <span class='btn btn-sm btn-danger pt-0'>-</span>
-            <span class='badge badge-info ml-2'>1</span>
-          </div>
-          <div>Rs 500</div>
-          <div>
-            <i class='fa fa-trash' style={{ color: 'red' }}></i>
-          </div>
-        </li>
-      </ul>
+      <table class='table bg-light'>
+        <thead style={{ color: 'white', backgroundColor: '#343A40' }}>
+          <tr>
+            <td>Name</td>
+            <td>Amount</td>
+            <td>Price</td>
+            <td>Action</td>
+          </tr>
+        </thead>
+        <tbody>
+          {cart.map((c) => (
+            <tr class=''>
+              <td>{c.title}</td>
+              <td>
+                <span
+                  onClick={() => increment(c)}
+                  class='btn btn-sm btn-success mr-2 pb-1 pt-1'
+                >
+                  +
+                </span>
+
+                <span
+                  onClick={() => decrement(c)}
+                  class='btn btn-sm btn-danger pb-1 pt-1'
+                >
+                  -
+                </span>
+                <span class='badge badge-info ml-3'>{c.item}</span>
+              </td>
+
+              <td>Rs {c.item * c.price}</td>
+              <td>
+                <i
+                  onClick={() => handleDelete(c)}
+                  class='fa fa-trash'
+                  style={{ color: 'red', cursor: 'pointer' }}
+                ></i>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

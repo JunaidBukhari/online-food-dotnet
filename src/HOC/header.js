@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 const Header = () => {
+  const cart = useSelector((state) => state.data.cart);
+  let itemsInCart = cart.reduce((value, obj) => (value = value + obj.item), 0);
   return (
     <div id='home' className='navbar navbar-expand-lg navbar-dark bg-dark'>
       <div className='container-fluid'>
@@ -25,38 +28,22 @@ const Header = () => {
                 Services
               </Link>
             </li>
-            <li className='nav-item dropdown'>
-              <a
-                className='nav-link dropdown-toggle active'
-                href='#'
-                id='navbarDropdown'
-                role='button'
-                data-bs-toggle='dropdown'
-                aria-expanded='false'
-              >
-                More
-              </a>
-              <ul className='dropdown-menu' aria-labelledby='navbarDropdown'>
-                <li>
-                  <Link to='/contact' className='dropdown-item'>
-                    Contact Us
-                  </Link>
-                </li>
-                <li>
-                  <Link to='/menu' className='dropdown-item'>
-                    Menu
-                  </Link>
-                </li>
-              </ul>
+
+            <li className='nav-item'>
+              <Link to='/contact' className='navbar-brand active'>
+                Contact Us
+              </Link>
             </li>
             <li className='nav-item'>
-              <a
-                className=' btn btn-danger '
-                aria-current='page'
-                href='http://localhost/project/addorder.php'
-              >
+              <Link to='/menu' className='navbar-brand active'>
+                Menu
+              </Link>
+            </li>
+
+            <li className='nav-item'>
+              <Link to='/cart' className=' btn btn-danger '>
                 ORDER NOW
-              </a>
+              </Link>
             </li>
           </ul>
 
@@ -71,7 +58,7 @@ const Header = () => {
             <i className='fa p-2' style={{ fontSize: '24px' }}>
               &#xf07a;
             </i>
-            <span className='badge badge-danger'> 5 </span>
+            <span className='badge badge-danger'> {itemsInCart} </span>
           </Link>
         </div>
       </div>
