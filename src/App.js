@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import PrivateRoute from './components/privateRoute';
 import Footer from './HOC/footer';
 import Header from './HOC/header';
 import Start from './pages/start';
@@ -16,11 +17,20 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path='/' element={<Start />}></Route>
           <Route path='/login' element={<Auth />}></Route>
-          <Route path='/menu' element={<Menu />}></Route>
-          <Route path='/cart' element={<Cart />}></Route>
-          <Route path='/services' element={<Services />}></Route>
+          <Route path='/' element={<PrivateRoute component={Start} />}></Route>
+          <Route
+            path='/menu'
+            element={<PrivateRoute component={Menu} />}
+          ></Route>
+          <Route
+            path='/cart'
+            element={<PrivateRoute component={Cart} />}
+          ></Route>
+          <Route
+            path='/services'
+            element={<PrivateRoute component={Services} />}
+          ></Route>
           <Route path='/*' element={<NotFound />}></Route>
         </Routes>
         <Footer />
