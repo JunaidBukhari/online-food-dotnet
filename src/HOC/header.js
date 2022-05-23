@@ -63,7 +63,8 @@ const Header = () => {
           <Link className='btn btn-info mr-5' to='/login'>
             Login / Sign Up
           </Link>
-          <a
+          <Link
+            to='/cart'
             href='http://localhost/project/addorder.php'
             className='btn text-light'
           >
@@ -71,7 +72,7 @@ const Header = () => {
               &#xf07a;
             </i>
             <span className='badge badge-danger'> 5 </span>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

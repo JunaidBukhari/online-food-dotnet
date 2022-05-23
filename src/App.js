@@ -6,6 +6,7 @@ import Start from './pages/start';
 import Menu from './pages/menu';
 import Services from './pages/services';
 import Auth from './pages/auth';
+import Cart from './pages/cart';
 import NotFound from './pages/notFound';
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path='/' element={<Start />}></Route>
           <Route path='/login' element={<Auth />}></Route>
           <Route path='/menu' element={<Menu />}></Route>
+          <Route path='/cart' element={<Cart />}></Route>
           <Route path='/services' element={<Services />}></Route>
           <Route path='/*' element={<NotFound />}></Route>
         </Routes>
