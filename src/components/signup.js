@@ -5,92 +5,93 @@ const Signup = () => {
     e.preventDefault();
   };
   return (
-    <div class='tab-pane fade show active'>
+    <div className='tab-pane fade show active'>
       <form>
-        <div class='form-outline mb-4'>
+        <div className='form-outline mb-4'>
           <input
             required
             placeholder='Name'
             type='text'
             id='registerName'
-            class='form-control'
+            className='form-control'
           />
         </div>
 
-        <div class='form-outline mb-4'>
+        <div className='form-outline mb-4'>
           <input
             required
             placeholder='Username'
             type='text'
             id='registerUsername'
-            class='form-control'
+            className='form-control'
           />
         </div>
 
-        <div class='form-outline mb-4'>
+        <div className='form-outline mb-4'>
           <input
             required
             placeholder='Email'
             type='email'
             id='registerEmail'
-            class='form-control'
+            className='form-control'
           />
         </div>
-        <div class='form-outline mb-4'>
+        <div className='form-outline mb-4'>
           <input
             required
             placeholder='Contact number'
             type='number'
             id='registerphone'
-            class='form-control'
+            className='form-control'
           />
         </div>
-        <div class='form-outline mb-4'>
+        <div className='form-outline mb-4'>
           <input
             required
             placeholder='Address'
             type='text'
             id='registerAddress'
-            class='form-control'
+            className='form-control'
           />
         </div>
 
-        <div class='form-outline mb-4'>
+        <div className='form-outline mb-4'>
           <input
             required
             placeholder='Password'
             type='password'
             id='registerPassword'
-            class='form-control'
+            className='form-control'
           />
         </div>
 
-        <div class='form-outline mb-4'>
+        <div className='form-outline mb-4'>
           <input
             required
             placeholder='Repeat Password'
             type='password'
             id='registerRepeatPassword'
-            class='form-control'
+            className='form-control'
           />
         </div>
 
-        <div class='form-check d-flex justify-content-start mb-4'>
+        <div className='form-check d-flex justify-content-start mb-4'>
           <input
             required
-            class='form-check-input me-2'
+            className='form-check-input me-2'
             type='checkbox'
             id='registerCheck'
           />
-          <span class='form-check-label' for='registerCheck'>
+          <span className='form-check-label' for='registerCheck'>
             I have read and agree to the terms
           </span>
         </div>
 
         <button
+          disabled
           type='submit'
           onClick={register}
-          class='btn btn-primary btn-block mb-3'
+          className='btn btn-primary btn-block mb-3'
         >
           Sign Up
         </button>

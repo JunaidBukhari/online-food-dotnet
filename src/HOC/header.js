@@ -1,9 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 const Header = () => {
+  const navigate = useNavigate();
   const cart = useSelector((state) => state.data.cart);
   let itemsInCart = cart.reduce((value, obj) => (value = value + obj.item), 0);
+  const logout = () => {
+    localStorage.clear();
+    toast.success('Logout Success');
+    navigate('/login');
+  };
   return (
     <div id='home' className='navbar navbar-expand-lg navbar-dark bg-dark'>
       <div className='container-fluid'>
@@ -47,9 +55,11 @@ const Header = () => {
             </li>
           </ul>
 
-          <Link className='btn btn-info mr-5' to='/login'>
-            Login / Sign Up
-          </Link>
+          {localStorage.getItem('isAuthenticated') && (
+            <button onClick={logout} className='btn btn-warning mr-5'>
+              Logout
+            </button>
+          )}
           <Link
             to='/cart'
             href='http://localhost/project/addorder.php'

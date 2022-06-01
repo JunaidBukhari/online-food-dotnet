@@ -9,6 +9,7 @@ import Services from './pages/services';
 import Auth from './pages/auth';
 import Cart from './pages/cart';
 import NotFound from './pages/notFound';
+import AuthRoute from './components/authRoute';
 function App() {
   return (
     <div className='App'>
@@ -17,7 +18,7 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path='/login' element={<Auth />}></Route>
+          <Route path='/login' element={<AuthRoute component={Auth} />}></Route>
           <Route path='/' element={<PrivateRoute component={Start} />}></Route>
           <Route
             path='/menu'

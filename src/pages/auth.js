@@ -9,27 +9,31 @@ const Auth = () => {
       className='mt-5 container p-5 d-flex justify-content-center'
     >
       <div className='col-xl-8 col-lg-8 col-md-12'>
-        <ul class='nav nav-pills nav-justified mb-3' id='ex1' role='tablist'>
-          <li class='nav-item' role='presentation'>
+        <ul
+          className='nav nav-pills nav-justified mb-3'
+          id='ex1'
+          role='tablist'
+        >
+          <li className='nav-item' role='presentation'>
             <span
               onClick={() => setTab('Login')}
               style={{ cursor: 'pointer' }}
-              class={`nav-link ${tab === 'Login' && 'active'}`}
+              className={`nav-link ${tab === 'Login' && 'active'}`}
             >
               Login
             </span>
           </li>
-          <li class='nav-item' role='presentation'>
+          <li className='nav-item' role='presentation'>
             <span
               onClick={() => setTab('Register')}
               style={{ cursor: 'pointer' }}
-              class={`nav-link ${tab === 'Register' && 'active'}`}
+              className={`nav-link ${tab === 'Register' && 'active'}`}
             >
               Register
             </span>
           </li>
         </ul>
-        <div class='tab-content'>
+        <div className='tab-content'>
           {tab === 'Login' ? <Login setTab={setTab} /> : <Signup />}
         </div>
       </div>
