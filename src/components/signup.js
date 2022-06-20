@@ -31,7 +31,7 @@ const Signup = (props) => {
   };
   return (
     <div className="tab-pane fade show active">
-      <form>
+      <form onSubmit={register}>
         <div className="form-outline mb-4">
           <input
             required
@@ -108,11 +108,7 @@ const Signup = (props) => {
           />
         </div>
 
-        <button
-          type="submit"
-          onClick={register}
-          className="btn btn-primary btn-block mb-3"
-        >
+        <button type="submit" className="btn btn-primary btn-block mb-3">
           Sign Up
         </button>
       </form>
