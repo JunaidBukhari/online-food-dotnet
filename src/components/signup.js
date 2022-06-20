@@ -1,97 +1,117 @@
-import React from 'react';
+import React, { useState } from 'react';
+import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { signupUser } from '../redux-toolkit/actions';
 
-const Signup = () => {
+const Signup = (props) => {
+  const dispatch = useDispatch();
+  const [body, setBody] = useState({
+    name: '',
+    address: '',
+    email: '',
+    phone: '',
+    password: '',
+    orders: 0,
+    password2: '',
+  });
   const register = (e) => {
     e.preventDefault();
+    if (body.password !== body.password2) {
+      toast.error('Password do not match');
+    } else {
+      dispatch(signupUser(body, setLogin));
+    }
+  };
+  const setLogin = () => {
+    props.setTab('Login');
+    toast.success('Sign Up is Complete, Please Login to continue ');
+  };
+  const onChange = (e) => {
+    setBody({ ...body, [e.target.name]: e.target.value });
   };
   return (
-    <div className='tab-pane fade show active'>
+    <div className="tab-pane fade show active">
       <form>
-        <div className='form-outline mb-4'>
+        <div className="form-outline mb-4">
           <input
             required
-            placeholder='Name'
-            type='text'
-            id='registerName'
-            className='form-control'
+            placeholder="Name"
+            type="text"
+            id="registerName"
+            className="form-control"
+            name="name"
+            value={body.name}
+            onChange={onChange}
           />
         </div>
 
-        <div className='form-outline mb-4'>
+        <div className="form-outline mb-4">
           <input
             required
-            placeholder='Username'
-            type='text'
-            id='registerUsername'
-            className='form-control'
+            placeholder="Email"
+            type="email"
+            id="registerEmail"
+            className="form-control"
+            name="email"
+            value={body.email}
+            onChange={onChange}
+          />
+        </div>
+        <div className="form-outline mb-4">
+          <input
+            required
+            placeholder="Contact number"
+            type="text"
+            id="registerphone"
+            className="form-control"
+            name="phone"
+            value={body.phone}
+            onChange={onChange}
+          />
+        </div>
+        <div className="form-outline mb-4">
+          <input
+            required
+            placeholder="Address"
+            type="text"
+            id="registerAddress"
+            className="form-control"
+            name="address"
+            value={body.address}
+            onChange={onChange}
           />
         </div>
 
-        <div className='form-outline mb-4'>
+        <div className="form-outline mb-4">
           <input
             required
-            placeholder='Email'
-            type='email'
-            id='registerEmail'
-            className='form-control'
-          />
-        </div>
-        <div className='form-outline mb-4'>
-          <input
-            required
-            placeholder='Contact number'
-            type='number'
-            id='registerphone'
-            className='form-control'
-          />
-        </div>
-        <div className='form-outline mb-4'>
-          <input
-            required
-            placeholder='Address'
-            type='text'
-            id='registerAddress'
-            className='form-control'
+            placeholder="Password"
+            type="password"
+            id="registerPassword"
+            className="form-control"
+            name="password"
+            value={body.password}
+            onChange={onChange}
           />
         </div>
 
-        <div className='form-outline mb-4'>
+        <div className="form-outline mb-4">
           <input
             required
-            placeholder='Password'
-            type='password'
-            id='registerPassword'
-            className='form-control'
+            placeholder="Repeat Password"
+            type="password"
+            id="registerRepeatPassword"
+            className="form-control"
+            name="password2"
+            value={body.password2}
+            onChange={onChange}
           />
-        </div>
-
-        <div className='form-outline mb-4'>
-          <input
-            required
-            placeholder='Repeat Password'
-            type='password'
-            id='registerRepeatPassword'
-            className='form-control'
-          />
-        </div>
-
-        <div className='form-check d-flex justify-content-start mb-4'>
-          <input
-            required
-            className='form-check-input me-2'
-            type='checkbox'
-            id='registerCheck'
-          />
-          <span className='form-check-label' for='registerCheck'>
-            I have read and agree to the terms
-          </span>
         </div>
 
         <button
-          disabled
-          type='submit'
+          type="submit"
           onClick={register}
-          className='btn btn-primary btn-block mb-3'
+          className="btn btn-primary btn-block mb-3"
         >
           Sign Up
         </button>

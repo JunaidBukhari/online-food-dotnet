@@ -6,15 +6,15 @@ const Auth = () => {
   return (
     <div
       style={{ backgroundColor: 'rgb(255 255 255 / 70%)' }}
-      className='mt-5 container p-5 d-flex justify-content-center'
+      className="mt-5 container p-5 d-flex justify-content-center"
     >
-      <div className='col-xl-8 col-lg-8 col-md-12'>
+      <div className="col-xl-8 col-lg-8 col-md-12">
         <ul
-          className='nav nav-pills nav-justified mb-3'
-          id='ex1'
-          role='tablist'
+          className="nav nav-pills nav-justified mb-3"
+          id="ex1"
+          role="tablist"
         >
-          <li className='nav-item' role='presentation'>
+          <li className="nav-item" role="presentation">
             <span
               onClick={() => setTab('Login')}
               style={{ cursor: 'pointer' }}
@@ -23,7 +23,7 @@ const Auth = () => {
               Login
             </span>
           </li>
-          <li className='nav-item' role='presentation'>
+          <li className="nav-item" role="presentation">
             <span
               onClick={() => setTab('Register')}
               style={{ cursor: 'pointer' }}
@@ -33,8 +33,12 @@ const Auth = () => {
             </span>
           </li>
         </ul>
-        <div className='tab-content'>
-          {tab === 'Login' ? <Login setTab={setTab} /> : <Signup />}
+        <div className="tab-content">
+          {tab === 'Login' ? (
+            <Login setTab={setTab} />
+          ) : (
+            <Signup setTab={setTab} />
+          )}
         </div>
       </div>
     </div>

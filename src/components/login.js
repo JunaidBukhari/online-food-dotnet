@@ -52,8 +52,8 @@ const Login = ({ setTab }) => {
             required
             value={user.email}
             onChange={(e) => setUser({ ...user, email: e.target.value })}
-            placeholder="Email or Username"
-            name="username"
+            placeholder="Email"
+            name="email"
             type="email"
             id="loginName"
             className="form-control"

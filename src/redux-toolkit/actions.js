@@ -24,3 +24,9 @@ export const loginUser = (body, setLogin) => (dispatch) => {
     }
   });
 };
+
+export const signupUser = (body, setLogin) => (dispatch) => {
+  axios.post(serverRoutes.SIGN_UP, body).then((res) => {
+    setLogin();
+  });
+};
