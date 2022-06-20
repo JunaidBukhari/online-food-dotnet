@@ -26,6 +26,12 @@ export const addToCartorUpdate = (body) => (dispatch) => {
     .then((res) => dispatch(getCart(body.userId)));
 };
 
+export const DeleteCart = (cartId, userId) => (dispatch) => {
+  axios
+    .delete(`${serverRoutes.DETELE_CART}/${cartId}`)
+    .then((res) => dispatch(getCart(userId)));
+};
+
 export const loginUser = (body, setLogin) => (dispatch) => {
   axios.post(serverRoutes.LOGIN, body).then((res) => {
     if (res.status === 200) {

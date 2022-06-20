@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addToCartorUpdate, getCart, getMenu } from '../redux-toolkit/actions';
-import { addToCart } from '../redux-toolkit/dataSlice';
+import {
+  addToCartorUpdate,
+  DeleteCart,
+  getCart,
+  getMenu,
+} from '../redux-toolkit/actions';
 const Cart = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -29,11 +33,10 @@ const Cart = () => {
     dispatch(addToCartorUpdate(newCart[index]));
   };
   const handleDelete = (d) => {
-    let newCart = [...cart];
-    let obj = newCart.filter((c) => c.id === d.id)?.[0];
-    let index = newCart.indexOf(obj);
-    newCart.splice(index, 1);
-    dispatch(addToCart(newCart));
+    console.log(d);
+    if (window.confirm('Are You Sure you want to Delete !')) {
+      dispatch(DeleteCart(d.id, d.userId));
+    }
   };
 
   const getFoodForCart = (id) => {
