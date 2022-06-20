@@ -1,9 +1,10 @@
 import axios from 'axios';
-import { setMenu } from './dataSlice';
-import { serverUrl } from './../constants/serverRoutes';
+import { setMenu, setUser } from './dataSlice';
+import { serverRoutes } from './../constants/serverRoutes';
+import toast from 'react-hot-toast';
 export const getMenu = (setLoading) => (dispatch) => {
   axios
-    .get(serverUrl)
+    .get(serverRoutes.GET_MENU)
     .then((res) => {
       dispatch(setMenu(res.data));
       setLoading(false);
@@ -11,4 +12,15 @@ export const getMenu = (setLoading) => (dispatch) => {
     .catch((err) => {
       setLoading(false);
     });
+};
+
+export const loginUser = (body, setLogin) => (dispatch) => {
+  axios.post(serverRoutes.LOGIN, body).then((res) => {
+    if (res.status === 200) {
+      dispatch(setUser(res.data));
+      setLogin(res.data);
+    } else {
+      toast.error('Email or Password is not correct');
+    }
+  });
 };
