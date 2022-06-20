@@ -49,7 +49,7 @@ const Cart = () => {
           <tbody>
             {cart.map((c) => (
               <tr className="">
-                <td>{c.title}</td>
+                <td>{c.name}</td>
                 <td>
                   <span
                     onClick={() => increment(c)}
