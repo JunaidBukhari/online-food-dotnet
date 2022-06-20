@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { setUser } from '../redux-toolkit/dataSlice';
 import { useDispatch } from 'react-redux';
+import { clearData } from '../redux-toolkit/dataSlice';
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -13,12 +14,12 @@ const Header = () => {
   }, []);
   const cart = useSelector((state) => state.data.cart);
   const user = useSelector((state) => state.data.loggedInUser);
-  let itemsInCart = cart.reduce((value, obj) => (value = value + obj.item), 0);
+
   const logout = () => {
     localStorage.clear();
     toast.success('Logout Success');
     navigate('/login');
-    dispatch(setUser({}));
+    dispatch(clearData());
   };
   const onRefresh = () => {
     if (localStorage.getItem('user')) {
@@ -78,16 +79,18 @@ const Header = () => {
               Logout
             </button>
           )}
-          <Link
-            to="/cart"
-            href="http://localhost/project/addorder.php"
-            className="btn text-light"
-          >
-            <i className="fa p-2" style={{ fontSize: '24px' }}>
-              &#xf07a;
-            </i>
-            <span className="badge badge-danger"> {itemsInCart} </span>
-          </Link>
+          {user.name && (
+            <Link
+              to="/cart"
+              href="http://localhost/project/addorder.php"
+              className="btn text-light"
+            >
+              <i className="fa p-2" style={{ fontSize: '24px' }}>
+                &#xf07a;
+              </i>
+              <span className="badge badge-danger"> {cart.length} </span>
+            </Link>
+          )}
         </div>
       </div>
     </div>

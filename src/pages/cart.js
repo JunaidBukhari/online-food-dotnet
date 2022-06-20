@@ -8,12 +8,15 @@ import {
 } from '../redux-toolkit/actions';
 const Cart = () => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getMenu(null));
-    dispatch(getCart(1));
-  }, []);
   const cart = useSelector((state) => state.data.cart);
   const food = useSelector((state) => state.data.menu);
+  const user = useSelector((state) => state.data.loggedInUser);
+  useEffect(() => {
+    if (user.id) {
+      dispatch(getMenu(null));
+      dispatch(getCart(user.id));
+    }
+  }, [user]);
   const increment = (d) => {
     let newCart = [...cart];
     let obj = newCart.filter((c) => c.id === d.id)?.[0];

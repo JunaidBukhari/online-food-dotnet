@@ -19,10 +19,15 @@ export const dataSlice = createSlice({
     setUser: (state, action) => {
       state.loggedInUser = action.payload;
     },
+    clearData: (state, action) => {
+      state.menu = [];
+      state.cart = [];
+      state.loggedInUser = {};
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addToCart, setMenu, setUser } = dataSlice.actions;
+export const { addToCart, setMenu, setUser, clearData } = dataSlice.actions;
 
 export default dataSlice.reducer;

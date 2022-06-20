@@ -1,37 +1,31 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
 import { useSelector, useDispatch } from 'react-redux';
-import { addToCart } from '../redux-toolkit/dataSlice';
-import { getMenu } from '../redux-toolkit/actions';
+import { addToCartorUpdate, getCart, getMenu } from '../redux-toolkit/actions';
 import RatingStars from '../components/ratings';
+import { useNavigate } from 'react-router-dom';
 const Menu = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getMenu(setLoading));
-  }, []);
+
   const [loading, setLoading] = useState(true);
   const data = useSelector((state) => state.data.menu);
   const cart = useSelector((state) => state.data.cart);
-  const additemtoCart = (d) => {
-    console.log(d);
-    if (cart.filter((c) => c.id === d.id).length) {
-      let newCart = [...cart];
-      let obj = newCart.filter((c) => c.id === d.id)?.[0];
-      let number = obj.item;
-      let newObj = { ...obj, item: ++number };
-      let index = newCart.indexOf(obj);
-      newCart[index] = newObj;
-      toast.success(`you have now ${newObj.item} ${d.name}`);
-      dispatch(addToCart(newCart));
-    } else {
-      const data = [...cart, { ...d, item: 1 }];
-      dispatch(addToCart(data));
-      toast.success(`${d.name} is Added to cart`);
+  const user = useSelector((state) => state.data.loggedInUser);
+  useEffect(() => {
+    if (user.id) {
+      dispatch(getMenu(setLoading));
+      dispatch(getCart(user.id));
     }
-  };
+  }, [user]);
   const addtoCart = (d) => {
-    console.log(d);
+    console.log(d, user, cart);
+    const body = {
+      userId: user.id,
+      foodId: d.id,
+      item: 1,
+    };
+    dispatch(addToCartorUpdate(body));
   };
   return (
     <div className="container ">
@@ -81,13 +75,23 @@ const Menu = () => {
                 <h5 className="text-dark">{d.name}</h5>
                 <h5 style={{ color: 'green' }}>Rs.{d.price}</h5>
               </span>
-              <button
-                style={{ position: 'absolute', bottom: '5px' }}
-                className="btn btn-success"
-                onClick={() => addtoCart(d)}
-              >
-                ADD TO CART
-              </button>
+              {cart.filter((c) => c.foodId === d.id).length === 0 ? (
+                <button
+                  style={{ position: 'absolute', bottom: '5px' }}
+                  className="btn btn-success"
+                  onClick={() => addtoCart(d)}
+                >
+                  ADD TO CART
+                </button>
+              ) : (
+                <button
+                  style={{ position: 'absolute', bottom: '5px' }}
+                  className="btn btn-success"
+                  onClick={() => navigate('/cart')}
+                >
+                  GO TO CART
+                </button>
+              )}
             </div>
           </div>
         ))}
