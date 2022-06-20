@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { setMenu, setUser } from './dataSlice';
+import { setMenu, setUser, addToCart } from './dataSlice';
 import { serverRoutes } from './../constants/serverRoutes';
 import toast from 'react-hot-toast';
 export const getMenu = (setLoading) => (dispatch) => {
@@ -7,11 +7,23 @@ export const getMenu = (setLoading) => (dispatch) => {
     .get(serverRoutes.GET_MENU)
     .then((res) => {
       dispatch(setMenu(res.data));
-      setLoading(false);
+      setLoading && setLoading(false);
     })
     .catch((err) => {
-      setLoading(false);
+      setLoading && setLoading(false);
     });
+};
+
+export const getCart = (userId) => (dispatch) => {
+  axios
+    .get(`${serverRoutes.GET_CART}/${userId}`)
+    .then((res) => dispatch(addToCart(res.data)));
+};
+
+export const addToCartorUpdate = (body) => (dispatch) => {
+  axios
+    .post(serverRoutes.ADD_TO_CART, body)
+    .then((res) => dispatch(getCart(body.userId)));
 };
 
 export const loginUser = (body, setLogin) => (dispatch) => {

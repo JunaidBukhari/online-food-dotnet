@@ -14,6 +14,7 @@ const Menu = () => {
   const data = useSelector((state) => state.data.menu);
   const cart = useSelector((state) => state.data.cart);
   const additemtoCart = (d) => {
+    console.log(d);
     if (cart.filter((c) => c.id === d.id).length) {
       let newCart = [...cart];
       let obj = newCart.filter((c) => c.id === d.id)?.[0];
@@ -28,6 +29,9 @@ const Menu = () => {
       dispatch(addToCart(data));
       toast.success(`${d.name} is Added to cart`);
     }
+  };
+  const addtoCart = (d) => {
+    console.log(d);
   };
   return (
     <div className="container ">
@@ -80,7 +84,7 @@ const Menu = () => {
               <button
                 style={{ position: 'absolute', bottom: '5px' }}
                 className="btn btn-success"
-                onClick={() => additemtoCart(d)}
+                onClick={() => addtoCart(d)}
               >
                 ADD TO CART
               </button>

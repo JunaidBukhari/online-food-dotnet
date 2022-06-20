@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { addToCartorUpdate, getCart, getMenu } from '../redux-toolkit/actions';
 import { addToCart } from '../redux-toolkit/dataSlice';
 const Cart = () => {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getMenu(null));
+    dispatch(getCart(1));
+  }, []);
   const cart = useSelector((state) => state.data.cart);
+  const food = useSelector((state) => state.data.menu);
   const increment = (d) => {
     let newCart = [...cart];
     let obj = newCart.filter((c) => c.id === d.id)?.[0];
@@ -11,21 +17,16 @@ const Cart = () => {
     let newObj = { ...obj, item: ++number };
     let index = newCart.indexOf(obj);
     newCart[index] = newObj;
-    dispatch(addToCart(newCart));
+    dispatch(addToCartorUpdate(newCart[index]));
   };
   const decrement = (d) => {
     let newCart = [...cart];
     let obj = newCart.filter((c) => c.id === d.id)?.[0];
     let index = newCart.indexOf(obj);
     let number = obj.item;
-    if (number > 1) {
-      let newObj = { ...obj, item: --number };
-      newCart[index] = newObj;
-      dispatch(addToCart(newCart));
-    } else {
-      newCart.splice(index, 1);
-      dispatch(addToCart(newCart));
-    }
+    let newObj = { ...obj, item: --number };
+    newCart[index] = newObj;
+    dispatch(addToCartorUpdate(newCart[index]));
   };
   const handleDelete = (d) => {
     let newCart = [...cart];
@@ -34,12 +35,17 @@ const Cart = () => {
     newCart.splice(index, 1);
     dispatch(addToCart(newCart));
   };
+
+  const getFoodForCart = (id) => {
+    return food.filter((f) => f.id === id)?.[0];
+  };
   return (
     <div className="container">
       <div className="mt-5">
         <table className="table bg-light">
           <thead style={{ color: 'white', backgroundColor: '#343A40' }}>
             <tr>
+              <td>Id</td>
               <td>Name</td>
               <td>Amount</td>
               <td>Price</td>
@@ -49,7 +55,8 @@ const Cart = () => {
           <tbody>
             {cart.map((c) => (
               <tr className="">
-                <td>{c.name}</td>
+                <td>{c.id}</td>
+                <td>{getFoodForCart(c.foodId)?.name}</td>
                 <td>
                   <span
                     onClick={() => increment(c)}
@@ -67,7 +74,7 @@ const Cart = () => {
                   <span className="badge badge-info ml-3">{c.item}</span>
                 </td>
 
-                <td>Rs {c.item * c.price}</td>
+                <td>Rs {c.item * getFoodForCart(c.foodId)?.price}</td>
                 <td>
                   <i
                     onClick={() => handleDelete(c)}
