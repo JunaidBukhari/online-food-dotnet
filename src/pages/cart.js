@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   addToCartorUpdate,
@@ -6,6 +6,7 @@ import {
   getCart,
   getMenu,
 } from '../redux-toolkit/actions';
+import Confirmation from '../components/confirmation';
 const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.data.cart);
@@ -45,13 +46,15 @@ const Cart = () => {
   const getFoodForCart = (id) => {
     return food.filter((f) => f.id === id)?.[0];
   };
+  const [show, setShow] = useState(false);
   return (
     <div className="container">
+      {<Confirmation show={show} setShow={setShow} />}
       <div className="mt-5">
         <table className="table bg-light">
           <thead style={{ color: 'white', backgroundColor: '#343A40' }}>
             <tr>
-              <td>Id</td>
+              <td>Sr. No</td>
               <td>Name</td>
               <td>Amount</td>
               <td>Price</td>
@@ -59,9 +62,9 @@ const Cart = () => {
             </tr>
           </thead>
           <tbody>
-            {cart.map((c) => (
+            {cart.map((c, index) => (
               <tr className="">
-                <td>{c.id}</td>
+                <td>{index + 1}</td>
                 <td>{getFoodForCart(c.foodId)?.name}</td>
                 <td>
                   <span
@@ -93,7 +96,11 @@ const Cart = () => {
           </tbody>
         </table>
       </div>
-      <button disabled={!cart.length} className="btn btn-success mt-3">
+      <button
+        onClick={() => setShow(true)}
+        disabled={!cart.length}
+        className="btn btn-success mt-3"
+      >
         {cart.length ? 'CONFIRM ORDER' : 'Add something to cart'}
       </button>
     </div>
