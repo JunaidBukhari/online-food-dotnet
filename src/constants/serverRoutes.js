@@ -8,4 +8,5 @@ export const serverRoutes = {
   DETELE_CART: `${serverUrl}/cart`, //cart id
   GET_ORDERS: `${serverUrl}/order`, //cart id
   SEND_ORDERS: `${serverUrl}/order`, //cart id
+  UPDATE_ORDERS: `${serverUrl}/order`, //cart id
 };

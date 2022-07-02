@@ -39,6 +39,13 @@ export const addToCartorUpdate = (body) => (dispatch) => {
     .then((res) => dispatch(getCart(body.userId)));
 };
 
+export const updateOrder = (body, id) => (dispatch) => {
+  axios.post(serverRoutes.UPDATE_ORDERS, body).then((res) => {
+    dispatch(getOrders(id));
+    toast.success(body.status);
+  });
+};
+
 export const DeleteCart = (cartId, userId) => (dispatch) => {
   axios
     .delete(`${serverRoutes.DETELE_CART}/${cartId}`)
