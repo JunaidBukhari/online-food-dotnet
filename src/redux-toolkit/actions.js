@@ -46,6 +46,15 @@ export const updateOrder = (body, id) => (dispatch) => {
   });
 };
 
+export const rateFood = (body, id) => (dispatch) => {
+  axios
+    .post(serverRoutes.RATE_FOOD, body)
+    .then((res) => {
+      toast.success("Thank you For Rating");
+    })
+    .then((a) => {});
+};
+
 export const DeleteCart = (cartId, userId) => (dispatch) => {
   axios
     .delete(`${serverRoutes.DETELE_CART}/${cartId}`)
