@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   addToCartorUpdate,
   DeleteCart,
   getCart,
   getMenu,
-} from '../redux-toolkit/actions';
-import Confirmation from '../components/confirmation';
+} from "../redux-toolkit/actions";
+import Confirmation from "../components/confirmation";
+import { Link } from "react-router-dom";
 const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.data.cart);
@@ -38,7 +39,7 @@ const Cart = () => {
   };
   const handleDelete = (d) => {
     console.log(d);
-    if (window.confirm('Are You Sure you want to Delete !')) {
+    if (window.confirm("Are You Sure you want to Delete !")) {
       dispatch(DeleteCart(d.id, d.userId));
     }
   };
@@ -52,7 +53,7 @@ const Cart = () => {
       {<Confirmation show={show} setShow={setShow} />}
       <div className="mt-5">
         <table className="table bg-light">
-          <thead style={{ color: 'white', backgroundColor: '#343A40' }}>
+          <thead style={{ color: "white", backgroundColor: "#343A40" }}>
             <tr>
               <td>Sr. No</td>
               <td>Name</td>
@@ -88,7 +89,7 @@ const Cart = () => {
                   <i
                     onClick={() => handleDelete(c)}
                     className="fa fa-trash"
-                    style={{ color: 'red', cursor: 'pointer' }}
+                    style={{ color: "red", cursor: "pointer" }}
                   ></i>
                 </td>
               </tr>
@@ -96,13 +97,15 @@ const Cart = () => {
           </tbody>
         </table>
       </div>
-      <button
-        onClick={() => setShow(true)}
-        disabled={!cart.length}
-        className="btn btn-success mt-3"
-      >
-        {cart.length ? 'CONFIRM ORDER' : 'Add something to cart'}
-      </button>
+      {cart.length ? (
+        <button onClick={() => setShow(true)} className="btn btn-success mt-3">
+          {cart.length ? "CONFIRM ORDER" : "Add something to cart"}
+        </button>
+      ) : (
+        <Link className="btn btn-success" to="/menu">
+          Add something to cart
+        </Link>
+      )}
     </div>
   );
 };

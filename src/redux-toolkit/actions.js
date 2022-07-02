@@ -1,7 +1,7 @@
-import axios from 'axios';
-import { setMenu, setUser, addToCart } from './dataSlice';
-import { serverRoutes } from './../constants/serverRoutes';
-import toast from 'react-hot-toast';
+import axios from "axios";
+import { setMenu, setUser, addToCart, setOrders } from "./dataSlice";
+import { serverRoutes } from "./../constants/serverRoutes";
+import toast from "react-hot-toast";
 export const getMenu = (setLoading) => (dispatch) => {
   axios
     .get(serverRoutes.GET_MENU)
@@ -18,6 +18,18 @@ export const getCart = (userId) => (dispatch) => {
   axios
     .get(`${serverRoutes.GET_CART}/${userId}`)
     .then((res) => dispatch(addToCart(res.data)));
+};
+
+export const getOrders = (userId) => (dispatch) => {
+  axios
+    .get(`${serverRoutes.GET_ORDERS}/${userId}`)
+    .then((res) => dispatch(setOrders(res.data)));
+};
+
+export const sendOrders = (body) => (dispatch) => {
+  axios
+    .post(`${serverRoutes.SEND_ORDERS}`, body)
+    .then((res) => dispatch(DeleteCart(body.cartId, body.userId)));
 };
 
 export const addToCartorUpdate = (body) => (dispatch) => {
@@ -38,7 +50,7 @@ export const loginUser = (body, setLogin) => (dispatch) => {
       dispatch(setUser(res.data));
       setLogin(res.data);
     } else {
-      toast.error('Email or Password is not correct');
+      toast.error("Email or Password is not correct");
     }
   });
 };
