@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
-import { setUser } from '../redux-toolkit/dataSlice';
-import { useDispatch } from 'react-redux';
-import { clearData } from '../redux-toolkit/dataSlice';
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { setUser } from "../redux-toolkit/dataSlice";
+import { useDispatch } from "react-redux";
+import { clearData } from "../redux-toolkit/dataSlice";
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -17,13 +17,13 @@ const Header = () => {
 
   const logout = () => {
     localStorage.clear();
-    toast.success('Logout Success');
-    navigate('/login');
+    toast.success("Logout Success");
+    navigate("/login");
     dispatch(clearData());
   };
   const onRefresh = () => {
-    if (localStorage.getItem('user')) {
-      dispatch(setUser(JSON.parse(localStorage.getItem('user'))));
+    if (localStorage.getItem("user")) {
+      dispatch(setUser(JSON.parse(localStorage.getItem("user"))));
     }
   };
   return (
@@ -52,8 +52,8 @@ const Header = () => {
             </li>
 
             <li className="nav-item">
-              <Link to="/contact" className="navbar-brand active">
-                Contact Us
+              <Link to="/orders" className="navbar-brand active">
+                My Orders
               </Link>
             </li>
             <li className="nav-item">
@@ -74,7 +74,7 @@ const Header = () => {
             </span>
           )}
 
-          {localStorage.getItem('isAuthenticated') && (
+          {localStorage.getItem("isAuthenticated") && (
             <button onClick={logout} className="btn btn-warning">
               Logout
             </button>
@@ -85,7 +85,7 @@ const Header = () => {
               href="http://localhost/project/addorder.php"
               className="btn text-light"
             >
-              <i className="fa p-2" style={{ fontSize: '24px' }}>
+              <i className="fa p-2" style={{ fontSize: "24px" }}>
                 &#xf07a;
               </i>
               <span className="badge badge-danger"> {cart.length} </span>
