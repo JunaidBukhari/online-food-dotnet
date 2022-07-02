@@ -1,10 +1,7 @@
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
-import { useDispatch } from "react-redux";
 import RatingStars from "./ratings";
 const RateFood = (props) => {
-  const dispatch = useDispatch();
-
   const [rating, setRating] = useState(0);
   return (
     <Modal show={props.show}>

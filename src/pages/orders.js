@@ -37,6 +37,7 @@ const Orders = () => {
   const orderRating = (b) => {
     dispatch(rateFood(b));
     dispatch(updateOrder({ ...order, rated: true }, user.id));
+    setShow(false);
   };
 
   const requiredfood = (id) => {

@@ -26,11 +26,12 @@ export const getOrders = (userId) => (dispatch) => {
     .then((res) => dispatch(setOrders(res.data)));
 };
 
-export const sendOrders = (body, id) => (dispatch) => {
+export const sendOrders = (body, id, user) => (dispatch) => {
   console.log("BODY", body);
   axios
     .post(`${serverRoutes.SEND_ORDERS}`, body)
-    .then((res) => dispatch(DeleteCart(id, body.userId)));
+    .then((res) => dispatch(DeleteCart(id, body.userId)))
+    .then((res) => dispatch(userOrdersUpdate(user)));
 };
 
 export const addToCartorUpdate = (body) => (dispatch) => {
@@ -42,7 +43,6 @@ export const addToCartorUpdate = (body) => (dispatch) => {
 export const updateOrder = (body, id) => (dispatch) => {
   axios.post(serverRoutes.UPDATE_ORDERS, body).then((res) => {
     dispatch(getOrders(id));
-    toast.success(body.status);
   });
 };
 
@@ -70,6 +70,10 @@ export const loginUser = (body, setLogin) => (dispatch) => {
       toast.error("Email or Password is not correct");
     }
   });
+};
+
+export const userOrdersUpdate = (body) => (dispatch) => {
+  axios.post(serverRoutes.USER_ORDERS, body).then((res) => {});
 };
 
 export const signupUser = (body, setLogin) => (dispatch) => {

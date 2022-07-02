@@ -10,4 +10,5 @@ export const serverRoutes = {
   SEND_ORDERS: `${serverUrl}/order`,
   UPDATE_ORDERS: `${serverUrl}/order`,
   RATE_FOOD: `${serverUrl}/food/rate`,
+  USER_ORDERS: `${serverUrl}/user/orders`,
 };

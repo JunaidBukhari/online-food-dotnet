@@ -1,8 +1,10 @@
 import { Modal } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { sendOrders } from "../redux-toolkit/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { sendOrders, userOrdersUpdate } from "../redux-toolkit/actions";
 const Confirmation = (props) => {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.data.loggedInUser);
+  console.log(user);
   const { cart } = props;
   console.log(cart);
   const confirmOrder = (e) => {
@@ -15,7 +17,7 @@ const Confirmation = (props) => {
         status: "Pending",
         paymentMethod: "Cash On Delivery",
       };
-      dispatch(sendOrders(body, cart[i].id));
+      dispatch(sendOrders(body, cart[i].id, user));
     }
     props.setShow(false);
   };
