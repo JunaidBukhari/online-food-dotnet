@@ -1,5 +1,24 @@
-import { Modal } from 'react-bootstrap';
+import { Modal } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { sendOrders } from "../redux-toolkit/actions";
 const Confirmation = (props) => {
+  const dispatch = useDispatch();
+  const { cart } = props;
+  console.log(cart);
+  const confirmOrder = (e) => {
+    e.preventDefault();
+    for (let i = 0; i < cart.length; i++) {
+      const body = {
+        foodId: cart[i].foodId,
+        userId: cart[i].userId,
+        amount: cart[i].item + "",
+        status: "Pending",
+        paymentMethod: "Cash On Delivery",
+      };
+      dispatch(sendOrders(body, cart[i].id));
+    }
+    props.setShow(false);
+  };
   return (
     <Modal show={props.show}>
       <div class="form-body container p-5">
@@ -37,7 +56,7 @@ const Confirmation = (props) => {
 
                   <button
                     id="submit"
-                    type="submit"
+                    onClick={confirmOrder}
                     class="btn btn-success mr-3 mt-5"
                   >
                     Confirm

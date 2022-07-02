@@ -50,7 +50,7 @@ const Cart = () => {
   const [show, setShow] = useState(false);
   return (
     <div className="container">
-      {<Confirmation show={show} setShow={setShow} />}
+      {<Confirmation show={show} setShow={setShow} cart={cart} />}
       <div className="mt-5">
         <table className="table bg-light">
           <thead style={{ color: "white", backgroundColor: "#343A40" }}>

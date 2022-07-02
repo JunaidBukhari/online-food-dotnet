@@ -26,10 +26,11 @@ export const getOrders = (userId) => (dispatch) => {
     .then((res) => dispatch(setOrders(res.data)));
 };
 
-export const sendOrders = (body) => (dispatch) => {
+export const sendOrders = (body, id) => (dispatch) => {
+  console.log("BODY", body);
   axios
     .post(`${serverRoutes.SEND_ORDERS}`, body)
-    .then((res) => dispatch(DeleteCart(body.cartId, body.userId)));
+    .then((res) => dispatch(DeleteCart(id, body.userId)));
 };
 
 export const addToCartorUpdate = (body) => (dispatch) => {
