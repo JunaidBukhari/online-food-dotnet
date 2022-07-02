@@ -33,7 +33,6 @@ const Orders = () => {
 
     setArray(newArray);
   }, [orders, menu]);
-
   const orderRating = (b) => {
     dispatch(rateFood(b));
     dispatch(updateOrder({ ...order, rated: true }, user.id));
@@ -68,13 +67,30 @@ const Orders = () => {
           </thead>
           <tbody>
             {array.map((c) => (
-              <tr>
+              <tr
+                style={{
+                  backgroundColor:
+                    c.status === "Pending"
+                      ? "#6495ED"
+                      : c.status === "Delivered"
+                      ? "#76B947"
+                      : c.status === "Canceled"
+                      ? "#E34234"
+                      : "",
+                  color:
+                    c.status === "Pending"
+                      ? "white"
+                      : c.status === "Delivered"
+                      ? "white"
+                      : c.status === "Canceled"
+                      ? "white"
+                      : "",
+                }}
+              >
                 <td>{c.OrderID}</td>
                 <td>{c.Food?.name}</td>
                 <td>
-                  <span className="ml-3" style={{ color: "green" }}>
-                    {c.amount}
-                  </span>
+                  <span className="ml-3">{c.amount}</span>
                 </td>
 
                 <td>Rs {c.amount * c.Food?.price}</td>
@@ -95,10 +111,9 @@ const Orders = () => {
                             )
                           );
                         }}
-                        className="fa"
-                        style={{ color: "red", cursor: "pointer" }}
+                        className="btn btn-danger"
                       >
-                        <span style={{ fontSize: "9px" }}>cancel order</span>
+                        <span>cancel order</span>
                       </i>
                     ) : (
                       c.status == "Delivered" &&
@@ -112,10 +127,9 @@ const Orders = () => {
                             setFood(c.Food);
                             setShow(true);
                           }}
-                          className="fa"
-                          style={{ color: "green", cursor: "pointer" }}
+                          className="btn btn-primary"
                         >
-                          <span style={{ fontSize: "9px" }}>rate order</span>
+                          <span>rate order</span>
                         </i>
                       )
                     )}
